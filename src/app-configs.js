@@ -41,8 +41,8 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://c3572873642d4d36ace6ac007c925492@sentryuat.sabagame.com/157",
-        logIdentifier: "vip-sicbo",
+        sentryUrl: "https://7ea1c32cf0ec40e4aa78fbe3ad6517eb@sentryuat.sabagame.com/179",
+        logIdentifier: "vip-sedie-war",
         env: "LOCAL",
     },
     authenticateSettings: {

@@ -1,15 +1,15 @@
 image: docker:19.03.12
 
 variables:
-    WORKING_PATH: /var/www/l1/sedie-war-service/
-    DOCKER_SERVICE_NAME: l1-sedie-war-service
-    DOCKER_IMAGE_PATH: l1/game-services/sedie-war-service
+    WORKING_PATH: /var/www/l1/vip-sedie-war-service/
+    DOCKER_SERVICE_NAME: l1-vip-sedie-war-service
+    DOCKER_IMAGE_PATH: l1/game-services/vip-sedie-war-service
     CONFIG_FILE_NAME: app-configs
     CONFIG_FILE_EXTENSION: js
     CONFIGS_SRC_DIR_PATH: ./configs
     CONFIG_CONTAINER_PATH: /opt/node_app/app/app-configs.js
-    PROJECT_NAME: l1-sedie-war-service
-    
+    PROJECT_NAME: l1-vip-sedie-war-service
+
 services:
     - docker:19.03.12-dind
 

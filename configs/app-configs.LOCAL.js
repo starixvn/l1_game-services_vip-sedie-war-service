@@ -1,5 +1,5 @@
 export default {
-    hostingPort: 8086,
+    hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
         apiUrl: "http://api.lumigame.com",
@@ -14,7 +14,7 @@ export default {
         enableApiLogs: true,
     },
     mainServerApiSettings: {
-        url: "http://localhost:8080/api",
+        url: "http://haproxy.lumigame.com:7000/main/api",
         auth: {
             url: "http://auth.lumigame.com",
             id: "game-services",
@@ -41,8 +41,8 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://d5702742f47c416ba480609215099562@sentryuat.sabagame.com/178",
-        logIdentifier: "sedie-war",
+        sentryUrl: "https://7ea1c32cf0ec40e4aa78fbe3ad6517eb@sentryuat.sabagame.com/179",
+        logIdentifier: "vip-sedie-war",
         env: "LOCAL",
     },
     authenticateSettings: {

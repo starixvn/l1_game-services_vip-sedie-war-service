@@ -1,11 +1,11 @@
 export default {
-    id: 27,
-    name: "SedieWar",
+    id: 28,
+    name: "VipSedieWar",
     durations: {
-        wholeRound: 42,
-        placingBets: 30,
+        wholeRound: 45,
+        placingBets: 35,
         lockingBet: 5,
-        shakeThePlateDuration: 3,
+        shakeThePlateDuration: 2,
     },
     choices: [
         "player",

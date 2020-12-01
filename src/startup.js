@@ -3,7 +3,7 @@ import { middlewares } from "sc-common";
 import { Table } from "sc-game-base";
 
 import appConfigs from "./app-configs";
-import { PlaceBetConsumer } from "./consumers";
+import PlaceBetConsumer from "./consumers/place-bet-consumer";
 
 export default class Startup extends Table.TableGameStartup {
     async configureServices(app) {
