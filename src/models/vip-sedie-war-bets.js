@@ -35,4 +35,4 @@ const schema = new mongoose.Schema({
     odds: { type: Object },
 });
 
-export default mongoose.model("VipSedieWar_cuoc", schema);
+export default mongoose.model("VipSedieWar_one", schema);
