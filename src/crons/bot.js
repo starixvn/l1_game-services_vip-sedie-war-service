@@ -7,8 +7,6 @@ export default class VipSedieWarBot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
 
-        this.betChoiceRatio = { MainOpts: 42, SubOpts: 30, AnyTripleOpts: 3, TotalOpts1: 15, TotalOpts2: 10 };
-
         this.betChoicesRatio = {
             war: 20,
             handOddEven: 60,
@@ -146,7 +144,7 @@ export default class VipSedieWarBot extends Core.BaseBot {
 
         return underRatioGroups.length > 0
             ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
-            : this.getRandomChoiceFromGroup(this.mainOpts);
+            : this.getRandomChoiceFromGroup(this.warChoices);
     }
 
     getMaxBet(bot, choice) {
