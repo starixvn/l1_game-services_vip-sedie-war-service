@@ -3,6 +3,8 @@ import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
+import constants from "../constants";
+
 export default class VipSedieWarBot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
@@ -26,10 +28,25 @@ export default class VipSedieWarBot extends Core.BaseBot {
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
         this.bots = [];
+        this.oddTicketRatio = 20;
+        this.oddTickets = 0;
 
         this.chance = new Chance();
 
         this.resetAllBets();
+    }
+
+    async reset() {
+        await super.reset();
+
+        const configs = this.gameData.gameConfigs;
+
+        if (configs?.botenabled) {
+            const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+            this.bots = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
+        } else {
+            this.bots = [];
+        }
     }
 
     async run() {
@@ -57,25 +74,12 @@ export default class VipSedieWarBot extends Core.BaseBot {
         }
     }
 
-    async reset() {
-        const configs = this.gameData.gameConfigs;
-
-        if (configs?.botenabled) {
-            const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
-
-            this.currentBotRatio = helpers.configHelper.getMaxBotForCurrentHour(configs);
-            this.maxNumberOfBots = Math.floor(bots.length * this.currentBotRatio);
-            this.bots = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
-        } else {
-            this.bots = [];
-        }
-    }
-
     async placeBet(bot) {
         const choice = this.getBetChoice(bot);
         const minBet = this.getMinBet();
         const maxBet = this.getMaxBet(bot, choice);
-        const betAmount = this.getBetAmount(minBet, maxBet);
+        const isOddTicket = this.totalTickets === 0 ? false : (this.oddTickets * 100) / this.totalTickets < this.oddTicketRatio;
+        const betAmount = this.getBetAmount(minBet, maxBet, isOddTicket);
 
         if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
             this.gameData.totalBets[choice] = (this.gameData.totalBets[choice] ?? 0) + betAmount;
@@ -85,6 +89,10 @@ export default class VipSedieWarBot extends Core.BaseBot {
             if (this.isSmallTicket(betAmount)) {
                 this.smallTickets++;
             }
+
+            if (isOddTicket) {
+                this.oddTickets++;
+            }
         }
     }
 
@@ -92,18 +100,27 @@ export default class VipSedieWarBot extends Core.BaseBot {
         this.bots = [];
     }
 
-    async resetAllBotData() {
-        await super.resetAllBotData();
+    resetAllBotData() {
+        super.resetAllBotData();
         this.resetAllBets();
     }
 
     resetAllBets() {
         this.allBets = {};
         this.smallTickets = 0;
+        this.oddTickets = 0;
     }
 
-    getBetAmount(minBet, maxBet) {
-        return this.chance.floating({ min: minBet, max: maxBet, fixed: 2 });
+    getBetAmount(minBet, maxBet, isOdd) {
+        return isOdd
+            ? this.chance.floating({ min: minBet, max: maxBet, fixed: 2 })
+            : this.convertAmountToChip(this.chance.integer({ min: minBet, max: maxBet }));
+    }
+
+    convertAmountToChip(amount) {
+        const chipList = constants.chips.filter((chip) => amount % chip === 0);
+
+        return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
 
     getBetChoice(bot) {
@@ -178,11 +195,11 @@ export default class VipSedieWarBot extends Core.BaseBot {
     }
 
     getTotalAmountOnChoiceGroup(choices) {
-        return choices.reduce((totalAmount, choice) => totalAmount + (this.allBets[choice] ?? 0));
+        return choices.reduce((totalAmount, choice) => totalAmount + (this.allBets[choice] ?? 0), 0);
     }
 
     getAllBetAmount() {
-        return this.definition.choices.reduce((totalBetAmount, choice) => totalBetAmount + (this.allBets[choice] ?? 0));
+        return this.definition.choices.reduce((totalBetAmount, choice) => totalBetAmount + (this.allBets[choice] ?? 0), 0);
     }
 
     isSmallTicket(amount) {
