@@ -3,8 +3,6 @@ import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
-import constants from "../constants";
-
 export default class VipSedieWarBot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
@@ -43,6 +41,7 @@ export default class VipSedieWarBot extends Core.BaseBot {
 
         if (configs?.botenabled) {
             const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+
             this.bots = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
         } else {
             this.bots = [];
@@ -112,15 +111,7 @@ export default class VipSedieWarBot extends Core.BaseBot {
     }
 
     getBetAmount(minBet, maxBet, isOdd) {
-        return isOdd
-            ? this.chance.floating({ min: minBet, max: maxBet, fixed: 2 })
-            : this.convertAmountToChip(this.chance.integer({ min: minBet, max: maxBet }));
-    }
-
-    convertAmountToChip(amount) {
-        const chipList = constants.chips.filter((chip) => amount % chip === 0);
-
-        return chipList.length > 0 ? chipList[0] : this.getMinBet();
+        return isOdd ? this.chance.floating({ min: minBet, max: maxBet, fixed: 2 }) : this.chance.integer({ min: minBet, max: maxBet });
     }
 
     getBetChoice(bot) {
