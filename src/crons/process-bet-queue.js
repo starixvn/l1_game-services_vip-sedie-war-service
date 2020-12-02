@@ -1,6 +1,6 @@
 import { Core } from "sc-game-base";
 
-export default class VipSedieWarProcessBetQueue extends Core.Cron.ProcessBetQueue {
+export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
     adjustBetTracks(playerName, bet) {
         const { betChoice, amount } = bet;
 

@@ -1,6 +1,6 @@
 import { Core } from "sc-game-base";
 
-export default class VipSedieWarInGameConsumer extends Core.BaseEventConsumers.InGameConsumer {
+export default class InGameConsumer extends Core.BaseEventConsumers.InGameConsumer {
     async buildPayload(realPlayer) {
         const payload = super.buildPayload(realPlayer);
         const { chips } = this.gameData.ingame[realPlayer.profile.name] || { chips: {} };
