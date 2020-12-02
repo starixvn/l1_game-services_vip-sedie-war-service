@@ -1,7 +1,7 @@
 import { Core } from "sc-game-base";
 
 import appConfigs from "./app-configs";
-import { VipSedieWarBot, VipSedieWarGameCron } from "./crons";
+import { VipSedieWarBot, VipSedieWarGameCron, VipSedieWarProcessBetQueue } from "./crons";
 import gameSettings from "./game-settings";
 import { VipSedieWarBetLogs, VipSedieWarBets, VipSedieWarRounds } from "./models";
 import { calculateSettlementResult, generateResult } from "./result-helpers";
@@ -20,7 +20,8 @@ const run = async () => {
     );
 
     const gameCron = new VipSedieWarGameCron(definition, gameData, new VipSedieWarBot(definition, gameData));
-    const startup = new Startup(appConfigs, definition, gameData, gameCron);
+    const betQueue = new VipSedieWarProcessBetQueue(definition, gameData);
+    const startup = new Startup(appConfigs, definition, gameData, gameCron, betQueue);
     const app = new Core.BaseGameApp(appConfigs, definition, gameData, startup);
 
     await app.run();

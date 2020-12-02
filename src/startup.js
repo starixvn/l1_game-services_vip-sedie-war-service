@@ -3,7 +3,7 @@ import { middlewares } from "sc-common";
 import { Core, Table } from "sc-game-base";
 
 import appConfigs from "./app-configs";
-import VipSedieWarPlaceBetConsumer from "./consumers/place-bet-consumer";
+import { VipSedieWarInGameConsumer, VipSedieWarPlaceBetConsumer } from "./consumers";
 
 export default class Startup extends Core.BaseStartup {
     async configureServices(app) {
@@ -17,6 +17,7 @@ export default class Startup extends Core.BaseStartup {
             definition: this.definition,
             gameData: this.gameData,
             userSignInConsumer: new Table.EventConsumers.UserSignInConsumer(this.definition, this.gameData),
+            inGameConsumer: new VipSedieWarInGameConsumer({ definition: this.definition, gameData: this.gameData }),
             placeBetConsumer: new VipSedieWarPlaceBetConsumer(this.definition, this.gameData),
         });
 
