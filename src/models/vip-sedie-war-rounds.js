@@ -44,6 +44,7 @@ const settlementResultSchema = new mongoose.Schema(
 );
 
 const Schema = new mongoose.Schema({
+    id: { type: Number, required: true },
     result: resultSchema,
     settlementResult: settlementResultSchema,
     time: { type: Date },
