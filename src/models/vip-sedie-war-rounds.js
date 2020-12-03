@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import autoIncrement from "mongoose-auto-increment-reworked";
+
+const modelName = "VipSedieWar_phien";
 
 const handResultSchema = new mongoose.Schema(
     {
@@ -43,11 +46,12 @@ const settlementResultSchema = new mongoose.Schema(
     { _id: false }
 );
 
-const Schema = new mongoose.Schema({
-    id: { type: Number },
+const roundSchema = new mongoose.Schema({
     result: resultSchema,
     settlementResult: settlementResultSchema,
     time: { type: Date },
 });
 
-export default mongoose.model("VipSedieWar_phien", Schema);
+roundSchema.plugin(autoIncrement.MongooseAutoIncrementID.plugin, { modelName, field: "id" });
+
+export default mongoose.model(modelName, roundSchema);
