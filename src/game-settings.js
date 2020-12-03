@@ -2,7 +2,7 @@ export default {
     id: 28,
     name: "VipSedieWar",
     durations: {
-        wholeRound: 45,
+        wholeRound: 44,
         placingBets: 35,
         lockingBet: 5,
         shakeThePlateDuration: 2,
