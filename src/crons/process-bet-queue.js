@@ -9,6 +9,7 @@ export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
 
             playerInGame.betTracks[betChoice] = (playerInGame.betTracks[betChoice] ?? 0) + amount;
 
+            playerInGame.chips = playerInGame.chips ?? {};
             playerInGame.chips[betChoice] = playerInGame.chips[betChoice] ?? {};
             playerInGame.chips[betChoice][amount] = (playerInGame.chips[betChoice][amount] ?? 0) + 1;
         }
