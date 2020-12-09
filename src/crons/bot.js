@@ -97,6 +97,8 @@ export default class Bot extends Core.BaseBot {
 
     async removeAllBots() {
         this.bots = [];
+        this.currentBotRatio = 0;
+        this.maxNumberOfBots = 0;
     }
 
     resetAllBotData() {
