@@ -56,18 +56,18 @@ export default class Bot extends Core.BaseBot {
         ) {
             const maxBotRandom = this.bots.length / this.gameData.remainingTime;
             const botsToBet = this.chance.integer({ min: (maxBotRandom * 2) / 3, max: maxBotRandom });
-            const botsToBeRemoved = [];
+            const indicesOfBotsToBeRemoved = [];
 
             for (let botIndex = 0; botIndex < botsToBet; botIndex++) {
                 const bot = this.bots[botIndex];
 
                 if (bot) {
                     await this.placeBet(bot);
-                    botsToBeRemoved.push(bot);
+                    indicesOfBotsToBeRemoved.push(botIndex);
                 }
             }
 
-            botsToBeRemoved.forEach((index) => {
+            indicesOfBotsToBeRemoved.forEach((index) => {
                 this.bots.splice(index, 1);
             });
         }
