@@ -1,4 +1,3 @@
-import Chance from "chance";
 import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
@@ -23,15 +22,13 @@ export default class Bot extends Core.BaseBot {
         this.handOddChoices = ["playerRed3", "playerWhite3", "bankerRed3", "bankerWhite3"];
         this.handEvenChoices = ["playerRed4", "playerWhite4", "bankerRed4", "bankerWhite4"];
 
+        this.allBets = {};
+
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
-        this.bots = [];
+
         this.oddTicketRatio = 20;
         this.oddTickets = 0;
-
-        this.chance = new Chance();
-
-        this.resetAllBets();
     }
 
     async reset() {
@@ -40,36 +37,11 @@ export default class Bot extends Core.BaseBot {
         const configs = this.gameData.gameConfigs;
 
         if (configs?.botenabled) {
-            const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+            const bots = await userInfos.find({ type: true, disabled: false }, "id name").lean().exec();
 
             this.bots = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
         } else {
             this.bots = [];
-        }
-    }
-
-    async run() {
-        if (
-            this.bots.length &&
-            this.gameData.gameConfigs?.botenabled &&
-            this.gameData.remainingTime > this.definition.durations.lockingBet
-        ) {
-            const maxBotRandom = this.bots.length / this.gameData.remainingTime;
-            const botsToBet = this.chance.integer({ min: (maxBotRandom * 2) / 3, max: maxBotRandom });
-            const indicesOfBotsToBeRemoved = [];
-
-            for (let botIndex = 0; botIndex < botsToBet; botIndex++) {
-                const bot = this.bots[botIndex];
-
-                if (bot) {
-                    await this.placeBet(bot);
-                    indicesOfBotsToBeRemoved.push(botIndex);
-                }
-            }
-
-            indicesOfBotsToBeRemoved.forEach((index) => {
-                this.bots.splice(index, 1);
-            });
         }
     }
 
@@ -93,12 +65,6 @@ export default class Bot extends Core.BaseBot {
                 this.oddTickets++;
             }
         }
-    }
-
-    async removeAllBots() {
-        this.bots = [];
-        this.currentBotRatio = 0;
-        this.maxNumberOfBots = 0;
     }
 
     resetAllBotData() {
