@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://6784c77b1b3b448b991de2692420cba1@10.99.99.187:803/119",
+        sentryUrl: "http://6784c77b1b3b448b991de2692420cba1@10.99.99.187:803/119",
         logIdentifier: "vip-sedie-war",
         env: "PROD",
     },
