@@ -5,7 +5,7 @@
     "main": "./src/app.js",
     "repository": {
         "type": "git",
-        "url": "https://git3.nexdev.net/l1/game-services/sedie-war-service.git"
+        "url": "https://git3.nexdev.net/l2/game-services/sedie-war-service.git"
     },
     "author": "pentagon",
     "license": "ISC",
