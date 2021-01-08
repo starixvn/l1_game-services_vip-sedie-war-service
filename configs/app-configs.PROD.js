@@ -2,8 +2,8 @@ export default {
     hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "http://10.2.189.51:7310",
-        authUrl: "http://10.2.189.51:7313",
+        apiUrl: "http://10.2.189.50:8310",
+        authUrl: "http://10.2.189.50:8313",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -14,9 +14,9 @@ export default {
         enabledApiLogs: true,
     },
     mainServerApiSettings: {
-        url: "http://10.2.189.51:7778/uat/main/api",
+        url: "http://10.2.189.50:8889/main/api",
         auth: {
-            url: "http://10.2.189.51:7313",
+            url: "http://10.2.189.50:8313",
             id: "game-services",
             secret: "gameservices@20luminet&",
         },
@@ -31,7 +31,8 @@ export default {
     },
     enabledLogs: true,
     database: {
-        url: "mongodb://lmn_backend:LmnBackend%4022027@10.99.99.187:37201/?replicaSet=SabaL2UAT",
+        url:
+            "mongodb://lmn_backend:%21%23x97%25uYZv%2A%5E%25%3E%7C%2Aqg%40E7FHi%3F9l%7B9r%3CK@10.99.99.53:37101,10.99.99.54:37102/?replicaSet=L2_SabaMain",
         options: {
             dbName: "minigame",
             useNewUrlParser: true,
@@ -40,14 +41,27 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://876ee0f450054dcd8ae1714702963c3a@10.99.99.187:800/209",
+        sentryUrl: "http://179225609ec746b684230fbea636e328@10.99.99.187:803/127",
         logIdentifier: "vip-sedie-war",
-        env: "UAT",
+        env: "PROD",
     },
     authenticateSettings: {
         audiences: ["api", "admin-api"],
     },
-    adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
+    adminSecretKey: "asWDEer4yGdgsdqR4uqmKQZgh",
     enableCorsWs: true,
-    corsUrls: ["http://uat.sabagame.net", "https://uat.sabagame.net", "http://uat-adm.sabagame.net", "https://uat-adm.sabagame.net"],
+    corsUrls: [
+        "https://sabagame.net",
+        "https://www.sabagame.net",
+        "http://sabagame.net",
+        "http://www.sabagame.net",
+        "https://gamesaba.net",
+        "https://www.gamesaba.net",
+        "http://gamesaba.net",
+        "http://www.gamesaba.net",
+        "http://admg.sabagame.net",
+        "https://admg.sabagame.net",
+        "http://adm.sabagame.net",
+        "https://adm.sabagame.net",
+    ],
 };
