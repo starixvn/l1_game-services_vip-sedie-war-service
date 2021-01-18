@@ -24,4 +24,17 @@ export default class PlaceBetConsumer extends Core.BaseEventConsumers.PlaceBetCo
             },
         ];
     }
+
+    adjustBetTracks(playerName, bet) {
+        if (this.gameData.ingame?.[playerName]) {
+            const playerInGame = this.gameData.ingame[playerName];
+            const { betChoice, amount } = bet;
+
+            playerInGame.betTracks[betChoice] = (playerInGame.betTracks[betChoice] ?? 0) + amount;
+
+            playerInGame.chips = playerInGame.chips ?? {};
+            playerInGame.chips[betChoice] = playerInGame.chips[betChoice] ?? {};
+            playerInGame.chips[betChoice][amount] = (playerInGame.chips[betChoice][amount] ?? 0) + 1;
+        }
+    }
 }
