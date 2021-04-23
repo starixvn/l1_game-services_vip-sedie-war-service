@@ -41,7 +41,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://79c9826a4a6b4e619b1630f4c4b3742d@sentryuat.sabagame.com/207",
+        sentryUrl: "https://acb36eb835d948d68c1aad9873754d51@sentry.lumigame.com/27",
         logIdentifier: "vip-sedie-war",
         env: "LOCAL_1",
     },

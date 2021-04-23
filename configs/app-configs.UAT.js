@@ -41,7 +41,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://876ee0f450054dcd8ae1714702963c3a@10.99.99.187:800/209",
+        sentryUrl: "http://8ac47fca6d3e4a41908896a64ef201ac@10.99.99.187:800/53",
         logIdentifier: "vip-sedie-war",
         env: "UAT",
     },
