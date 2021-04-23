@@ -1,6 +1,6 @@
 import { Core } from "sc-game-base";
 
-export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
+export default class ProcessBetQueue extends Core.Crons.ProcessBetQueue {
     decreaseBetTracks(playerName, bet) {
         if (this.gameData.ingame?.[playerName]) {
             const playerInGame = this.gameData.ingame[playerName];
