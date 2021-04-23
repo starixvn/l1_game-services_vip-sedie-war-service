@@ -1,5 +1,5 @@
 import awilix from "awilix";
-import { Core } from "sc-game-base";
+import { Table } from "sc-game-base";
 
 import { VipSedieWarInGameConsumer, VipSedieWarPlaceBetConsumer } from "./consumers";
 import { VipSedieWarBot, VipSedieWarGameCron, VipSedieWarProcessBetQueue } from "./crons";
@@ -7,7 +7,7 @@ import { VipSedieWarBetLogs, VipSedieWarBets, VipSedieWarRounds } from "./models
 
 const { asClass, asValue } = awilix;
 
-export default class SeDieWarContainerRegistry extends Core.ContainerRegistry {
+export default class SeDieWarContainerRegistry extends Table.TableContainerRegistry {
     registerModels() {
         super.registerModels();
 
