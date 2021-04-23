@@ -18,6 +18,14 @@ export default class SeDieWarContainerRegistry extends Core.ContainerRegistry {
         });
     }
 
+    registerPublishers() {
+        super.registerPublishers();
+
+        this.container.register({
+            userSignInPublisher: asClass(Table.EventPublishers.TableUserSignInPublisher).singleton(),
+        });
+    }
+
     registerConsumers() {
         super.registerConsumers();
 
