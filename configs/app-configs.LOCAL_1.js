@@ -42,9 +42,9 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://19b35e8de3bb451c8af1ab95d06ec27b@sentryuat.sabagame.com/192",
+        sentryUrl: "https://13f39b8359404ed5aec23655e64ccf78@sentry.lumigame.com/2",
         logIdentifier: "vip-sedie-war",
-        env: "LOCAL",
+        env: "LOCAL-1",
     },
     authenticateSettings: {
         audiences: ["api", "admin-api"],

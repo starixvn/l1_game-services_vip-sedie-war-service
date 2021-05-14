@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://6784c77b1b3b448b991de2692420cba1@10.99.99.187:803/119",
+        sentryUrl: "http://58fc00e79ab34a3bab04a79038760cb8@sentry.sabagame.com/8",
         logIdentifier: "vip-sedie-war",
         env: "AWS",
     },
