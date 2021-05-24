@@ -43,7 +43,7 @@ export default {
     },
     sentry: {
         sentryUrl: "https://19b35e8de3bb451c8af1ab95d06ec27b@sentryuat.sabagame.com/192",
-        logIdentifier: "vipsedie",
+        logIdentifier: "vip-sedie-war",
         env: "LOCAL",
     },
     authenticateSettings: {
