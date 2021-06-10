@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://7ea1c32cf0ec40e4aa78fbe3ad6517eb@sentryuat.sabagame.com/179",
+        sentryUrl: "https://13f39b8359404ed5aec23655e64ccf78@sentry.lumigame.com/2",
         logIdentifier: "vip-sedie-war",
         env: "LOCAL",
     },
@@ -51,5 +51,5 @@ export default {
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
     enableCorsWs: false,
-    corsUrls: ["http://localhost:7456", "http://localhost:7000", "http://games.lumigame.com", "http://admin.lumigame.com"],
+    corsUrls: ["https://localhost:7456", "https://localhost:7000", "https://games.lumigame.com", "https://admin.lumigame.com"],
 };
