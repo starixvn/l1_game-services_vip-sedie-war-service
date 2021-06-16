@@ -1,4 +1,4 @@
-import { generateResult } from "../generate-result";
+import { generateResult } from "../../src/result-helpers/generate-result";
 
 describe("generateResult tests", () => {
     it("should return enough results", () => {
