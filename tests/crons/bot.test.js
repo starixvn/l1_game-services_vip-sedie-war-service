@@ -12,15 +12,7 @@ import gameSettings from "../../src/game-settings";
 const definition = new Core.GameDefinition(gameSettings);
 const gameData = new Core.GameData(gameSettings.durations.wholeRound);
 gameData.gameConfigs = {
-    choices_maxbet: {
-        even: 2000,
-        odd: 2000,
-        red3: 1000,
-        white3: 1000,
-        red4: 100,
-        white4: 100,
-        red2: 2000,
-    },
+    choices_maxbet: getChoiceMaxBet(),
     minbet: 1,
     bot_maxbet: 1000,
 };
@@ -140,4 +132,61 @@ describe("SedieBot tests", () => {
             expect(totalAmount).toBe(randomAmount);
         });
     });
+
+    describe("getMaxBet", () => {
+        it("should return the max value of small ticket if not reach smallTicketRatio", () => {
+            // arrange
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const betChoice = chance.pickone(bot.handOddEvenChoices);
+
+            // act
+            const maxBet = bot.getMaxBet(null, betChoice);
+
+            // assert
+            expect(maxBet).toEqual(bot.getMinBet() * bot.smallTicketValueRatio);
+        });
+
+        it("betChoice belongs handOddEvenChoices should return the lowest-valued between bot_maxbet and choice_maxbet if already passed smallTicketRatio", () => {
+            // arrange
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            bot.smallTickets = 1;
+            bot.totalTickets = 1;
+            const betChoice = chance.pickone(bot.handOddEvenChoices);
+
+            // act
+            const maxBet = bot.getMaxBet(null, betChoice);
+
+            // assert
+            expect(maxBet).toEqual(gameData.gameConfigs.bot_maxbet);
+        });
+    });
 });
+
+function getChoiceMaxBet() {
+    const options = [
+        "player",
+        "banker",
+        "tie",
+        "odd",
+        "even",
+        "playerOdd",
+        "playerEven",
+        "playerRed3",
+        "playerRed4",
+        "playerWhite3",
+        "playerWhite4",
+        "bankerOdd",
+        "bankerEven",
+        "bankerRed3",
+        "bankerRed4",
+        "bankerWhite3",
+        "bankerWhite4",
+    ];
+
+    const choices_maxbet = {};
+    options.forEach((option) => {
+        choices_maxbet[option] = 2000;
+    });
+
+    return choices_maxbet;
+}
