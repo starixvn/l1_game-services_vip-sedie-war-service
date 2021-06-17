@@ -123,4 +123,21 @@ describe("SedieBot tests", () => {
             expect(result).toBeFalse();
         });
     });
+
+    describe("getTotalBetAmount test", () => {
+        it("should return correct amount", () => {
+            // arrange
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+            const randomAmount = chance.integer({ min: bot.getMinBet(), max: bot.getMinBet() * bot.smallTicketValueRatio - 1 });
+            const choice = chance.pickone(bot.handOddEvenChoices);
+            const currentBet = {};
+            currentBet[choice] = randomAmount;
+
+            // act
+            const totalAmount = bot.getTotalBetAmount(currentBet);
+
+            // assert
+            expect(totalAmount).toBe(randomAmount);
+        });
+    });
 });
