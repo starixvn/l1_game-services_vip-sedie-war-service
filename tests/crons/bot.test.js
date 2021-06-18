@@ -90,7 +90,7 @@ describe("SedieBot tests", () => {
         expect(totalBetAmount).toEqual(expected);
     });
 
-    describe("isSmallTicket test", () => {
+    describe("isSmallTicket", () => {
         it("should return true if amount less than minBet * smallTicketValueRatio", () => {
             // arrange
             const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
@@ -116,7 +116,7 @@ describe("SedieBot tests", () => {
         });
     });
 
-    describe("getTotalBetAmount test", () => {
+    describe("getTotalBetAmount", () => {
         it("should return correct amount", () => {
             // arrange
             const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
@@ -161,7 +161,7 @@ describe("SedieBot tests", () => {
         });
     });
 
-    describe("placeBet test", () => {
+    describe("placeBet", () => {
         it("should not place bet in locking time", async () => {
             // arrange
             gameData.remainingTime = chance.integer({ min: 0, max: definition.durations.lockingBet });
