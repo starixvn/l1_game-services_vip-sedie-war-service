@@ -160,6 +160,51 @@ describe("SedieBot tests", () => {
             expect(maxBet).toEqual(gameData.gameConfigs.bot_maxbet);
         });
     });
+
+    describe("placeBet test", () => {
+        it("should not place bet in locking time", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: 0, max: definition.durations.lockingBet });
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(0);
+            expect(bot.getAllBetAmount()).toEqual(0);
+        });
+
+        it("should be small ticket firstly", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(1);
+            expect(bot.getAllBetAmount()).toBeGreaterThan(0);
+        });
+
+        it("should NOT be small ticket if reached ratio", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
+            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            bot.smallTickets = 1;
+            bot.totalTickets = 1;
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(1);
+        });
+    });
 });
 
 function getChoiceMaxBet() {
