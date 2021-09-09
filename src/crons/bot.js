@@ -25,6 +25,7 @@ export default class Bot extends Core.Crons.BaseBot {
         this.allBets = {};
 
         this.smallTicketRatio = 70;
+        this.smallTicketValueRatio = 50;
         this.smallTickets = 0;
 
         this.oddTicketRatio = 20;
@@ -130,7 +131,7 @@ export default class Bot extends Core.Crons.BaseBot {
         const botMaxBet = gameConfigs.bot_maxbet;
 
         const isSmallTicket = this.totalTickets === 0 ? true : (this.smallTickets * 100) / this.totalTickets < this.smallTicketRatio;
-        const maxBetOfSmallTicket = Math.min(minBet * 50, botMaxBet * 0.3, maxBetPerChoice);
+        const maxBetOfSmallTicket = Math.min(minBet * this.smallTicketValueRatio, botMaxBet * 0.3, maxBetPerChoice);
 
         let maxBet = Math.min(maxBetPerChoice, botMaxBet);
 
@@ -162,6 +163,6 @@ export default class Bot extends Core.Crons.BaseBot {
     }
 
     isSmallTicket(amount) {
-        return amount <= this.getMinBet() * 50;
+        return amount <= this.getMinBet() * this.smallTicketValueRatio;
     }
 }
