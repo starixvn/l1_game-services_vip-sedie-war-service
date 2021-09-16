@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="G:\Projects\L1\sedie-war\tests\result-helpers\generate-result.test.js">
+        <testCase name="generateResult tests should return enough results" duration="7"/>
+    </file>
+    <file path="G:\Projects\L1\sedie-war\tests\result-helpers\calculate-settlement-result.test.js">
+        <testCase name="calculateSettlementResult tests should return Player if total points of player is greater than banker" duration="4"/>
+        <testCase name="calculateSettlementResult tests should return Banker if total points of banker is greater than player" duration="0"/>
+        <testCase name="calculateSettlementResult tests should return Tie if total points of banker is equal player" duration="1"/>
+        <testCase name="calculateSettlementResult tests should return Even if total points of banker and player is odd" duration="2"/>
+        <testCase name="calculateSettlementResult tests should return Odd if total points of banker and player is odd" duration="1"/>
+        <testCase name="calculateSettlementResult tests should return white3 when both banker and player have 1 reds" duration="1"/>
+        <testCase name="calculateSettlementResult tests should return white4 when both banker and player have 0 reds" duration="1"/>
+        <testCase name="calculateSettlementResult tests should return red3 when both banker and player have 3 reds" duration="1"/>
+        <testCase name="calculateSettlementResult tests should return red4 when both banker and player have 4 reds" duration="0"/>
+    </file>
+    <file path="G:\Projects\L1\sedie-war\tests\crons\game-cron.test.js">
+        <testCase name="isStartingTime tests should return true time is shakeThePlateTime" duration="2"/>
+        <testCase name="isStartingTime tests should return false time is NOT shakeThePlateTime" duration="1"/>
+    </file>
+    <file path="G:\Projects\L1\sedie-war\tests\consumers\vip-sedie-war-in-game-consumer.test.js">
+        <testCase name="buildPayload tests should return payload with correct remainingTime" duration="3"/>
+        <testCase name="buildPayload tests should return payload with correct chips of player" duration="2"/>
+    </file>
+    <file path="G:\Projects\L1\sedie-war\tests\consumers\vip-sedie-war-place-bet-consumer.test.js">
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if game was disabled" duration="4"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return cannotPlaceBet notice if bet comes in settlement time" duration="1"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if bet comes in locking bet time" duration="0"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if bet comes in shaking plate time" duration="0"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should not return any failures if valid" duration="0"/>
+        <testCase name="adjustBetTracks tests should increase betTrack and chips of choice properly" duration="1"/>
+        <testCase name="adjustBetTracks tests should increase betTrack and chips  of choice properly when has existing bet" duration="1"/>
+    </file>
+    <file path="G:\Projects\L1\sedie-war\tests\crons\bot.test.js">
+    </file>
+</testExecutions>
