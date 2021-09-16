@@ -1,6 +1,6 @@
 import { Core } from "sc-game-base";
 
-export default class InGameConsumer extends Core.BaseEventConsumers.InGameConsumer {
+export default class VipSedieWarInGameConsumer extends Core.BaseEventConsumers.InGameConsumer {
     async consume(realPlayer) {
         const payload = await this.buildPayload(realPlayer);
 
