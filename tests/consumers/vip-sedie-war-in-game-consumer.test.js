@@ -16,6 +16,14 @@ const mockGameData = () => {
             choice01: 200,
         },
     };
+    gameData.exchangeRates = {
+        exId: 1,
+        code: {
+            USD: 1,
+            VND: 0.00004405,
+            IDR: 0.07099,
+        },
+    };
 
     return gameData;
 };
@@ -32,6 +40,11 @@ const realPlayer = {
     },
     profile: {
         name: playerName,
+    },
+    session: {
+        currencyCode: "USD",
+        multiplier: 1,
+        currencyGroupId: 1,
     },
 };
 
