@@ -10,9 +10,10 @@ const run = async () => {
     const gameData = new Core.GameData(gameSettings.durations.wholeRound);
 
     const container = new SeDieWarContainerRegistry().register(appConfigs, definition, gameData);
-    const app = new Core.BaseGameApp(container);
+    const app = new Core.BaseGameApp(container, appConfigs);
 
     await app.run();
+    await app.startGame(container);
 };
 
 run();
