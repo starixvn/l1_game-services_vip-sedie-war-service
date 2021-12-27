@@ -1,6 +1,7 @@
 import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
+import gameSettings from "../game-settings";
 
 export default class Bot extends Core.Crons.BaseBot {
     constructor(definition, gameData, userInfosRepository) {
@@ -80,7 +81,7 @@ export default class Bot extends Core.Crons.BaseBot {
     }
 
     getBetAmount(minBet, maxBet, isOdd) {
-        return isOdd ? this.chance.floating({ min: minBet, max: maxBet, fixed: 2 }) : this.chance.integer({ min: minBet, max: maxBet });
+        return isOdd ? this.chance.integer({ min: minBet, max: maxBet }) : this.convertAmountToChip(this.chance.integer({ min: minBet, max: maxBet }));
     }
 
     getBetChoice(bot) {
@@ -164,5 +165,11 @@ export default class Bot extends Core.Crons.BaseBot {
 
     isSmallTicket(amount) {
         return amount <= this.getMinBet() * this.smallTicketValueRatio;
+    }
+
+    convertAmountToChip(amount) {
+        const chipList = gameSettings.chips.filter((chip) => amount / chip >= 1);
+
+        return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
 }
