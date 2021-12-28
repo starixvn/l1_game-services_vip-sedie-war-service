@@ -50,6 +50,7 @@ const roundSchema = new mongoose.Schema({
     result: resultSchema,
     settlementResult: settlementResultSchema,
     time: { type: Date },
+    exchangeRateId: { type: Number, require: true },
 });
 
 export default mongoose.model(modelName, roundSchema);

@@ -33,6 +33,10 @@ const schema = new mongoose.Schema({
     betwin: { type: Number, default: 0 },
     time: { type: Date },
     odds: { type: Object },
+
+    currency: { type: String, require: true },
+    rate: { type: Number, require: true },
+    partnerId: { type: String, require: true },
 });
 
 export default mongoose.model("VipSedieWar_one", schema);

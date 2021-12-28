@@ -11,6 +11,10 @@ const betLogSchema = new mongoose.Schema({
 
     choice: { type: String, required: true },
     amount: { type: Number, required: true },
+
+    currency: { type: String, require: true },
+    rate: { type: Number, require: true },
+    partnerId: { type: String, require: true },
 });
 
 export default mongoose.model("VipSedieWar_cuoc", betLogSchema);
