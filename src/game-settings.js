@@ -46,4 +46,10 @@ export default {
         bankerWhite4: 17,
     },
     chips: [20_000_000, 5_000_000, 1_000_000, 500_000, 200_000, 100_000, 50_000, 20_000, 10_000],
+    hedgeBetGroups: [
+        ["player", "banker"],
+        ["even", "odd"],
+        ["playerEven", "playerOdd"],
+        ["bankerEven", "bankerOdd"],
+    ],
 };
