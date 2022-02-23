@@ -45,4 +45,10 @@ export default {
         bankerWhite3: 16,
         bankerWhite4: 17,
     },
+    hedgeBetGroups: [
+        ["player", "banker"],
+        ["even", "odd"],
+        ["playerEven", "playerOdd"],
+        ["bankerEven", "bankerOdd"],
+    ],
 };
