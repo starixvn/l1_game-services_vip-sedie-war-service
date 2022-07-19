@@ -6,8 +6,8 @@ import { Core } from "sc-game-base";
 import { BaseBot } from "sc-game-base/src/core/crons";
 import { BaseEventPublisher } from "sc-game-base/src/core/event-publishers";
 
-import SedieBot from "../../src/crons/bot";
-import gameSettings from "../../src/game-settings";
+import SedieBot from "../../../src/crons/bot";
+import gameSettings from "../../../src/game-settings";
 
 const definition = new Core.GameDefinition(gameSettings);
 const gameData = new Core.GameData(gameSettings.durations.wholeRound);

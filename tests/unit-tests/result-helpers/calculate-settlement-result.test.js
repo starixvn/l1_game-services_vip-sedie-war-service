@@ -1,4 +1,4 @@
-import { calculateSettlementResult } from "../../src/result-helpers/calculate-settlement-result";
+import { calculateSettlementResult } from "../../../src/result-helpers/calculate-settlement-result";
 
 describe("calculateSettlementResult tests", () => {
     it("should return Player if total points of player is greater than banker", () => {

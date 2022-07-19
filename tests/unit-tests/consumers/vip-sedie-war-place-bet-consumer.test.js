@@ -2,8 +2,8 @@ import Chance from "chance";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
-import VipSeDieWarPlaceBetConsumer from "../../src/consumers/vip-sedie-war-place-bet-consumer";
-import gameSetting from "../../src/game-settings";
+import VipSeDieWarPlaceBetConsumer from "../../../src/consumers/vip-sedie-war-place-bet-consumer";
+import gameSetting from "../../../src/game-settings";
 
 const mockGameData = () => {
     const gameData = new Core.GameData();

@@ -2,8 +2,8 @@ import { stub, stubMongooseModelStupidly } from "jest-micro-auto-stub";
 import mongoose from "mongoose";
 import { Core } from "sc-game-base";
 
-import { VipSedieWarInGameConsumer } from "../../src/consumers";
-import gameSetting from "../../src/game-settings";
+import { VipSedieWarInGameConsumer } from "../../../src/consumers";
+import gameSetting from "../../../src/game-settings";
 
 const mockGameData = () => {
     const gameData = new Core.GameData();
