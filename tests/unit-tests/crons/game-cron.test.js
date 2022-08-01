@@ -1,8 +1,8 @@
 import Chance from "chance";
 import { Core } from "sc-game-base";
 
-import SedieWarGameCron from "../../src/crons/game-cron";
-import gameSetting from "../../src/game-settings";
+import SedieWarGameCron from "../../../src/crons/game-cron";
+import gameSetting from "../../../src/game-settings";
 
 describe("isStartingTime tests", () => {
     const gameData = new Core.GameData();
