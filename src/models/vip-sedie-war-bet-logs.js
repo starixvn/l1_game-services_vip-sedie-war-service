@@ -10,8 +10,8 @@ const betLogSchema = new mongoose.Schema({
     choice: { type: String, required: true },
     amount: { type: Number, required: true },
 
-    currency: { type: String, require: true },
-    rate: { type: Number, require: true },
+    currency: { type: String, required: true },
+    rate: { type: Number, required: true },
 
     playerId: { type: Number },
     operatorId: { type: String, required: false },

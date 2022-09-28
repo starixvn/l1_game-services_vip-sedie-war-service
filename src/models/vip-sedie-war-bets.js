@@ -31,8 +31,8 @@ const schema = new mongoose.Schema({
     time: { type: Date },
     odds: { type: Object },
 
-    currency: { type: String, require: true },
-    rate: { type: Number, require: true },
+    currency: { type: String, required: true },
+    rate: { type: Number, required: true },
 
     playerId: { type: Number },
     operatorId: { type: String, required: false },
