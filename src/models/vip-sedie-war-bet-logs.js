@@ -15,7 +15,7 @@ const betLogSchema = new mongoose.Schema({
 
     playerId: { type: Number },
     operatorId: { type: String, required: false },
-    roundId: { type: Number, default: 0 },
+    roundId: { type: Number, default: 0, required: true },
 });
 
 export default mongoose.model("VipSedieWar_cuoc", betLogSchema);
