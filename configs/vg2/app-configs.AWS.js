@@ -2,8 +2,8 @@ export default {
     hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "http://l1_game_api_prod:5000",
-        authUrl: "http://l1_auth_api_prod:5000",
+        apiUrl: "http://l2_game_api_aws:5000",
+        authUrl: "http://l2_auth_api_aws:5000",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -22,7 +22,7 @@ export default {
     },
     enabledLogs: true,
     database: {
-        url: "mongodb://lmn_backend:M7K4ttH%2AtZ3ml%3F%29%7CA%5DjN4%3FLBhwF%266IO%3C@10.99.99.54:27101,10.99.99.53:27102/?replicaSet=SabaMain",
+        url: "mongodb://lmn_backend:ilthODrRz8C4s2%5D%7B%7CLV%3Du%5D2vsf6o%5Ex0m@10.99.99.56:37101/?replicaSet=L2_Sabaaws&appName=VIPSedieWar",
         options: {
             dbName: "minigame",
             useNewUrlParser: true,
@@ -31,12 +31,12 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://58fc00e79ab34a3bab04a79038760cb8@10.2.189.50:9009/8",
-        logIdentifier: "sedie-war",
-        env: "PROD",
+        sentryUrl: "http://179225609ec746b684230fbea636e328@10.99.99.187:803/127",
+        logIdentifier: "vip-sedie-war",
+        env: "aws",
     },
     authenticateSettings: {
-        url: "http://l1_auth_api_prod:5000",
+        url: "http://l2_auth_api_AWS:5000",
         id: "game-services",
         secret: "gameservices@20luminet&",
         requestTimeout: 10000,
@@ -44,27 +44,10 @@ export default {
         audiences: ["api", "admin-api"],
     },
     userServiceSettings: {
-        url: "http://l1_user_service_prod:5000",
+        url: "http://localhost:8004/api",
     },
     adminSecretKey: "asWDEer4yGdgsdqR4uqmKQZgh",
     enableCorsWs: true,
-    corsUrls: [
-        "http://sabagame.com",
-        "http://www.sabagame.com",
-        "https://sabagame.com",
-        "https://www.sabagame.com",
-        "https://www.gamesaba.com",
-        "https://gamesaba.com",
-        "http://www.gamesaba.com",
-        "http://gamesaba.com",
-        "http://admg.sabagame.com",
-        "https://admg.sabagame.com",
-        "http://adm.sabagame.com",
-        "https://adm.sabagame.com",
-    ],
-    metrics: {
-        enable: true,
-        secretKey: "30d15293-c7de-4c77-9293-b85d6c5bfe1a",
-    },
-    enableMsgpackParser: true,
+    corsUrls: ["https://sc2-games.sportsfun.app", "https://sc2-adm.sportsfun.app"],
+    chips: [20_000_000, 5_000_000, 1_000_000, 500_000, 200_000, 100_000, 50_000, 20_000, 10_000],
 };

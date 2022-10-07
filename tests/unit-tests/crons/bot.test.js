@@ -8,6 +8,7 @@ import { BaseEventPublisher } from "sc-game-base/src/core/event-publishers";
 
 import SedieBot from "../../../src/crons/bot";
 import gameSettings from "../../../src/game-settings";
+import appConfigs from "../../../src/app-configs";
 
 const definition = new Core.GameDefinition(gameSettings);
 const gameData = new Core.GameData(gameSettings.durations.wholeRound);
@@ -30,7 +31,7 @@ describe("SedieBot tests", () => {
         // arrange
 
         // act
-        const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+        const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
 
         // assert
         expect(bot.allBets).toBeEmpty();
@@ -38,7 +39,7 @@ describe("SedieBot tests", () => {
 
     it("reset should call super.reset", async () => {
         // arrange
-        const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+        const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
         spyOn(BaseBot.prototype, "reset");
 
         // act
@@ -50,7 +51,7 @@ describe("SedieBot tests", () => {
 
     it("run should call super.run", async () => {
         // arrange
-        const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+        const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
         spyOn(BaseBot.prototype, "run");
 
         // act
@@ -62,7 +63,7 @@ describe("SedieBot tests", () => {
 
     it("resetAllBotData should call super.resetAllBotData", () => {
         // arrange
-        const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+        const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
         spyOn(BaseBot.prototype, "resetAllBotData");
 
         // act
@@ -74,7 +75,7 @@ describe("SedieBot tests", () => {
 
     it("getAllBetAmount should return sum of bot bet amount", () => {
         // arrange
-        const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+        const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
         let expected = 0;
 
         definition.choices.forEach((choice) => {
@@ -93,7 +94,7 @@ describe("SedieBot tests", () => {
     describe("isSmallTicket", () => {
         it("should return true if amount less than minBet * smallTicketValueRatio", () => {
             // arrange
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const randomAmount = chance.integer({ min: bot.getMinBet(), max: bot.getMinBet() * bot.smallTicketValueRatio - 1 });
 
             // act
@@ -105,7 +106,7 @@ describe("SedieBot tests", () => {
 
         it("should return false if amount greater than minBet * smallTicketValueRatio", () => {
             // arrange
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const randomAmount = chance.integer({ min: bot.getMinBet() * bot.smallTicketValueRatio, max: gameData.gameConfigs.bot_maxbet });
 
             // act
@@ -119,7 +120,7 @@ describe("SedieBot tests", () => {
     describe("getTotalBetAmount", () => {
         it("should return correct amount", () => {
             // arrange
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const randomAmount = chance.integer({ min: bot.getMinBet(), max: bot.getMinBet() * bot.smallTicketValueRatio - 1 });
             const choice = chance.pickone(bot.handOddEvenChoices);
             const currentBet = {};
@@ -136,7 +137,7 @@ describe("SedieBot tests", () => {
     describe("getMaxBet", () => {
         it("should return the max value of small ticket if not reach smallTicketRatio", () => {
             // arrange
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const betChoice = chance.pickone(bot.handOddEvenChoices);
 
             // act
@@ -148,7 +149,7 @@ describe("SedieBot tests", () => {
 
         it("betChoice belongs handOddEvenChoices should return the lowest-valued between bot_maxbet and choice_maxbet if already passed smallTicketRatio", () => {
             // arrange
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             bot.smallTickets = 1;
             bot.totalTickets = 1;
             const betChoice = chance.pickone(bot.handOddEvenChoices);
@@ -165,7 +166,7 @@ describe("SedieBot tests", () => {
         it("should not place bet in locking time", async () => {
             // arrange
             gameData.remainingTime = chance.integer({ min: 0, max: definition.durations.lockingBet });
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const botPlayer = { id: "23" };
 
             // act
@@ -179,7 +180,7 @@ describe("SedieBot tests", () => {
         it("should be small ticket firstly", async () => {
             // arrange
             gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             const botPlayer = { id: "23" };
 
             // act
@@ -193,7 +194,7 @@ describe("SedieBot tests", () => {
         it("should NOT be small ticket if reached ratio", async () => {
             // arrange
             gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
-            const bot = new SedieBot(definition, gameData, publisher, userInfosRepository);
+            const bot = new SedieBot(definition, gameData, userInfosRepository, appConfigs);
             bot.smallTickets = 1;
             bot.totalTickets = 1;
             const botPlayer = { id: "23" };
