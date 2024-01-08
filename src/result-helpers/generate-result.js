@@ -3,45 +3,56 @@ import randomLib1 from "random";
 import { Random, MersenneTwister19937 } from "random-js";
 import { randomInt } from "crypto";
 
-function random1(min, max) {
-    return randomInt(min, max + 1);
-}
-
-function random2(min, max) {
-    const chance = new Chance();
-    return chance.natural({ min: min, max: max });
-}
-
-function random3(min, max) {
-    const chance = new Chance();
-    return chance.integer({ min: min, max: max });
-}
-
-function random4(min, max) {
-    return randomLib1.int(min, max);
-}
-
-function random5(min, max) {
-    const randomJs = new Random(MersenneTwister19937.autoSeed());
-    return randomJs.integer(min, max);
-}
-
-const randomModes = {
-    1: [random2],
-    2: [random1, random3],
-    3: [random4, random5],
+const mathRandom = () => {
+    return Math.random();
 };
 
-const generateHandResult = (randomMode) => {
-    const randomFunctions = randomModes[randomMode] || randomModes[1];
+const random1 = () => {
+    return (mathRandom() * 2) >> 0 !== 0;
+};
 
+const random2 = () => {
+    return Math.floor(mathRandom() * 6) + Math.floor(mathRandom() * 6) + Math.floor(mathRandom() * 6) + 3 <= 10;
+};
+
+const random3 = () => {
+    return (Math.floor(mathRandom() * 6) + Math.floor(mathRandom() * 6) + Math.floor(mathRandom() * 6) + 3) % 2 === 0;
+};
+
+const random4 = () => {
+    return (Math.floor(mathRandom() * 10000) + 1) % 2 !== 0;
+};
+
+const random5 = () => {
+    return randomInt(1, 7) > 3;
+};
+
+const random6 = () => {
     const chance = new Chance();
-    const randomFunction = chance.pickone(randomFunctions);
+    return chance.integer({ min: 1, max: 6 }) > 3;
+};
 
-    const red1 = chance.bool();
-    const red2 = randomFunction(0, 5) + randomFunction(0, 5) + randomFunction(0, 5) + 3 <= 10;
-    const red3 = randomFunction(1, 10000) % 2 !== 0;
-    const red4 = (randomFunction(0, 5) + randomFunction(0, 5) + randomFunction(0, 5) + 3) % 2 === 0;
+const random7 = () => {
+    return randomLib1.int(1, 6) > 3;
+};
+
+const random8 = () => {
+    const randomJS = new Random(MersenneTwister19937.autoSeed());
+    return randomJS.integer(1, 6) > 3;
+};
+
+const randomModes = {
+    1: [random1, random2, random3, random4],
+    2: [random5, random6, random7, random8],
+    3: [random1, random3, random5, random7],
+};
+
+const generateHandResult = (mode) => {
+    const selectedMode = mode >= 1 && mode <= 3 ? mode : 1;
+    const red1 = randomModes[selectedMode][0]();
+    const red2 = randomModes[selectedMode][1]();
+    const red3 = randomModes[selectedMode][2]();
+    const red4 = randomModes[selectedMode][3]();
 
     return { red1, red2, red3, red4 };
 };
