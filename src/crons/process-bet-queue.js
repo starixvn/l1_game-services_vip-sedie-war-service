@@ -22,4 +22,13 @@ export default class ProcessBetQueue extends Core.Crons.ProcessBetQueue {
 
         return betResult;
     }
+
+    isCountOnTotalBets(player) {
+        return this.gameData.currencies.some(
+            (currency) =>
+                currency.partnerId === player.session.operatorId &&
+                currency.name === player.session.currencyName &&
+                !(currency.isTest && currency.isUncountOnTotal)
+        );
+    }
 }
